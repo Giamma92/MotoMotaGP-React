@@ -1,0 +1,116 @@
+@use './base/border' as *;
+@use './base/space' as *;
+@use './base/breakpoint' as *;
+@use './base/size' as *;
+
+.login-form {
+    label {
+    display: block;
+    margin-bottom: $space-8;
+}
+
+input {
+    width: 100%;
+    @include radius-small;
+}
+
+input {
+    padding: $space-8;
+    border: 2px solid var(--neutral-600);
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+
+    input {
+        width: auto;
+    }
+    }
+}
+
+.login {
+display: grid;
+
+@include breakpoint(medium) {
+    grid-template-columns: 550px 2fr;
+}
+
+.login__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: $space-48;
+    padding: $space-24;
+    z-index: 1;
+    
+    @include breakpoint(medium) {
+    padding: $space-48 $space-96;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.inner__brand {
+    display: flex;
+    align-items: center;
+    gap: $space-16;
+}
+
+.brand__logo {
+    max-width: 66px;
+}
+
+.brand__text {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+
+    > :first-child {
+    font-weight: bold;
+    @include size-20;
+    }
+
+    > :last-child {
+    @include size-14;
+    }
+}
+
+.login__background {
+    display: none;
+    background-color: #000;
+    background-image: url("../assets/img/login-background.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    @include breakpoint(medium) {
+    display: block;
+    }
+}
+
+.reveal {
+    animation: reveal 0.3s ease-in;
+}
+
+.login__footer {
+    padding-bottom: $space-24;
+
+    @include breakpoint(medium) {
+    padding-bottom: 0;
+    }
+}
+}
+
+@keyframes reveal {
+0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+}
+
+100% {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
