@@ -1,8 +1,11 @@
 import '../scss/LoginForm.scss';
 import React, { useState, useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
+import { Link, useNavigate } from 'react-router-dom';
 import { Md5 } from 'ts-md5';
 import { LOGIN_QUERY } from './queries';
+import { LOGIN_MUTATION } from './mutations';
+import { AUTH_TOKEN } from './constants';
 import { Toast, notifyError, notifySuccess } from "./Toast";
 import type { LazyQueryHookOptions } from '@apollo/client';
 
@@ -10,6 +13,8 @@ import type { LazyQueryHookOptions } from '@apollo/client';
 localStorage.clear();
 
 function LoginForm() {
+
+  const navigate = useNavigate();
 
   const [formState, setFormState] = useState({
     username: '',
@@ -25,18 +30,44 @@ function LoginForm() {
     notifyOnNetworkStatusChange: true,
   } as LazyQueryHookOptions
 
-  const [ doLogin, { loading, error, data }] = useLazyQuery(LOGIN_QUERY, queryOptions);
+  //const [ doLogin, { loading, error, data }] = useLazyQuery(LOGIN_QUERY, queryOptions);
+
+  const [doLogin, { loading, error, data }] = useMutation(LOGIN_MUTATION, {
+    variables: {
+      username: formState.username,
+      password: formState.password
+    }
+    // ,onCompleted: ({ login }) => {
+    //   console.log("Get token ", login.token);
+    //   localStorage.setItem(AUTH_TOKEN, login.token);
+    //   navigate('/');
+    // }
+  });
+
+  const sendLogin = () => {
+    if(!formState.username || !formState.password)
+      notifyError("Inserisci username e password!");
+    else 
+      doLogin({
+        variables: { 
+          username: formState.username, 
+          password: formState.password 
+        }
+      });
+  }
 
   useEffect(() => {
     // handle data here
-    if(data && data.user && data.user.iduser && !loading) {
+    if(data?.loginUser?.token && !loading) {
       //console.log(data);
-      localStorage.setItem('isLoggedIn', "true");
-      localStorage.setItem('user', JSON.stringify(data.user, null, 4));
-      localStorage.setItem('config', JSON.stringify(data.config, null, 4));
+      localStorage.setItem(AUTH_TOKEN, data.loginUser.token);
+      //localStorage.setItem('isLoggedIn', "true");
+      // localStorage.setItem('user', JSON.stringify(data.user, null, 4));
+      // localStorage.setItem('config', JSON.stringify(data.config, null, 4));
       
       notifySuccess('Login effettuato con successo!');
-      window.location.href = '/';
+      navigate('/');
+      //window.location.href = '/';
     } else if(!!data && !data.user && !loading) {
       localStorage.setItem('isLoggedIn', "false");
       notifyError('Username o password errati!');
@@ -72,9 +103,10 @@ function LoginForm() {
       </div>
       <button className="button color-secondary behavior-full" 
         onClick={(e) => {
-          e.preventDefault();
-          console.log("[LoginForm] Submit login");
-          doLogin({ variables: { username: formState.username, password: formState.password, configId: '1' } });}
+            e.preventDefault();
+            console.log("[LoginForm] Submit login");
+            sendLogin();
+          }
         }
         >Login
       </button>
