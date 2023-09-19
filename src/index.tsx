@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { AUTH_TOKEN } from './components/constants';
 
 // src/index.tsx
 
@@ -21,10 +23,25 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+//Server Link
+const httpLink = new HttpLink({ uri: process.env.REACT_APP_PUBLIC_GRAPHQL_SERVER_URL })
+console.log("Apollo server url: ", process.env)
+//Auth token
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem(AUTH_TOKEN);
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : ''
+    }
+  };
+});
+
 // Apollo client
 export const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  uri: process.env.PUBLIC_GRAPHQL_SERVER_URL
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
+  //uri: process.env.PUBLIC_GRAPHQL_SERVER_URL
 });
 
 
