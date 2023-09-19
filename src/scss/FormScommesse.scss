@@ -1,0 +1,30 @@
+@use './base/border' as *;
+@use './base/space' as *;
+
+.scommesse-form {
+label {
+    display: block;
+    margin-bottom: $space-8;
+    max-width: 400px;
+}
+
+input, select {
+    width: 100%;
+    @include radius-small;
+}
+
+input, select {
+    padding: $space-8;
+    border: 2px solid var(--neutral-600);
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+
+    input, select {
+        width: auto;
+    }
+}
+}
