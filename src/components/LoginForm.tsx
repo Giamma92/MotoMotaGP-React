@@ -114,7 +114,7 @@ function LoginForm() {
         <input type="checkbox" name="remember" />
         <span>Remember me</span>
       </label>
-      <a href="#">Forgot password?</a>
+      <a href="/">Forgot password?</a>
     </form>
   );
 };
