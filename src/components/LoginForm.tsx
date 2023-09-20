@@ -1,13 +1,13 @@
 import '../scss/LoginForm.scss';
 import React, { useState, useEffect } from 'react';
-import { useLazyQuery, useMutation } from '@apollo/client';
-import { Link, useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 import { Md5 } from 'ts-md5';
-import { LOGIN_QUERY } from './queries';
+// import { LOGIN_QUERY } from './queries';
 import { LOGIN_MUTATION } from './mutations';
 import { AUTH_TOKEN } from './constants';
 import { Toast, notifyError, notifySuccess } from "./Toast";
-import type { LazyQueryHookOptions } from '@apollo/client';
+// import type { LazyQueryHookOptions } from '@apollo/client';
 
 
 localStorage.clear();
@@ -21,14 +21,14 @@ function LoginForm() {
     password: '',
   });
 
-  const [loginState, setLoginState] = useState({
+  const [ loginState ] = useState({
     error: '',
   });
 
-  const queryOptions = {
-    fetchPolicy: "no-cache",
-    notifyOnNetworkStatusChange: true,
-  } as LazyQueryHookOptions
+  // const queryOptions = {
+  //   fetchPolicy: "no-cache",
+  //   notifyOnNetworkStatusChange: true,
+  // } as LazyQueryHookOptions
 
   //const [ doLogin, { loading, error, data }] = useLazyQuery(LOGIN_QUERY, queryOptions);
 
@@ -74,7 +74,7 @@ function LoginForm() {
       // setLoginState({error: 'Login Failed!'});
     }
     
-  }, [data, loading]);
+  }, [data, loading, navigate]);
 
   return (
     <form className="login-form space-content">
