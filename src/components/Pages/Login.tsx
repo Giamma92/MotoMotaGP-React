@@ -1,29 +1,29 @@
-import LoginForm from './LoginForm'
+import LoginForm from '../Forms/LoginForm'
 
-import '../scss/LoginForm.scss';
-import '../scss/globals.scss';
+// import { ReactComponent as LogoSvg } from 'assets/img/site-logo.svg';
 
 function Login() {
   return (
-    (<section className="bg-neutral-100">
+    (<section className="bg-gray-50 dark:bg-gray-900">
       <div className="login">
         <div className="login__inner reveal h-screen">
           <div className="inner__brand">
             <div className="bg-neutral-900 radius-large">
-              <><img
+              <img
                   className="brand__logo radius-large"
                   src="/site-logo.svg"
                   alt=""
-                /></>
+                />
+
+                {/* <LogoSvg className="brand__logo radius-large"/> */}
             </div>
-            <div className="brand__text">
-              <span>MotoMota GP</span>
-              <span>The official MotoMota site</span>
+            <div className="brand__text text-gray-900 dark:text-white">
+              <h1>MotoMota GP</h1>
+              <p>The official MotoMota site</p>
             </div>
           </div>
           <div className="inner__form space-content">
             <div className="space-content">
-              <h1>Login</h1>
               <LoginForm />
             </div>
           </div>

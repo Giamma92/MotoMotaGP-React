@@ -46,7 +46,7 @@ display: grid;
     z-index: 1;
     
     @include breakpoint(medium) {
-    padding: $space-48 $space-96;
+    padding: $space-96 $space-64;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
     }
 }
@@ -58,7 +58,7 @@ display: grid;
 }
 
 .brand__logo {
-    max-width: 66px;
+    max-width: 120px;
 }
 
 .brand__text {
@@ -68,7 +68,7 @@ display: grid;
 
     > :first-child {
     font-weight: bold;
-    @include size-20;
+    @include size-48;
     }
 
     > :last-child {
