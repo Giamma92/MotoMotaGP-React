@@ -1,11 +1,11 @@
-import "../../assets/scss/FormScommesse.scss";
+import "scss/FormScommesse.scss";
 import React, { useState, useEffect } from "react";
 import { useMutation } from '@apollo/client';
-import { INSERT_SCOMMESA } from "./mutations";
-import { getConfig, getCurrentRace, getLoggedInUser } from "../utils/local-storage-utils";
-import SelectPiloti from "./SelectPiloti";
-import { Toast, notifyError, notifySuccess } from "./Toast";
-import { MutationFetchPolicy } from "@apollo/client/core/watchQueryOptions";
+import { INSERT_SCOMMESA } from "components/mutations";
+import { getConfig, getCurrentRace, getLoggedInUser } from "utils/local-storage-utils";
+import SelectPiloti from "../SelectPiloti";
+import { Toast, notifyError, notifySuccess } from "../Toast";
+// import { MutationFetchPolicy } from "@apollo/client/core/watchQueryOptions";
 
 function FormScommesse() {
 
