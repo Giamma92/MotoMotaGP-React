@@ -10,10 +10,11 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: 'motomotagp'        # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'         # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '18.x'                   # set this to the node version to use
-
+  AZURE_WEBAPP_NAME: 'motomotagp'            # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: '.'             # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '18.x'                       # set this to the node version to use
+  REACT_APP_PUBLIC_GRAPHQL_SERVER_URL: $     # set this to the server url
+  
 jobs:
   build:
     runs-on: ubuntu-latest
