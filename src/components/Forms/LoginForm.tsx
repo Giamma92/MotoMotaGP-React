@@ -8,6 +8,8 @@ import { LOGIN_MUTATION } from '../mutations';
 // import { AUTH_TOKEN } from './constants';
 import { Toast, notifyError, notifySuccess } from "../Toast";
 import { useAuth } from '../Auth/AuthContext';
+import Input from 'components/UI/form/Input';
+// import { useFormInput } from 'components/UI/form/FormInput';
 // import type { LazyQueryHookOptions } from '@apollo/client';
 
 function LoginForm() {
@@ -15,17 +17,28 @@ function LoginForm() {
   let authContext: any = useAuth(); 
   const navigate = useNavigate();
 
-  // //clear token when navigate to login page
-  // authContext.logout();
-
   const [formState, setFormState] = useState({
     username: '',
     password: '',
+    remember: true,
+
+    isValid: true
   });
 
-  // const [ loginState ] = useState({
-  //   error: '',
-  // });
+
+  function OnChangeInputForm(value: any, error: string, field: string): void {
+      (formState as any)[field] = value;
+
+      const isValid = !error || error === ''
+      setFormState({...formState, isValid})
+  }
+
+  function  ValidatePassword(value: any) {
+    if (value?.length < 8) {
+          return 'La password deve essere lunga almeno 8 caratteri';
+        }
+        return ''; // No error
+  }
 
   // const queryOptions = {
   //   fetchPolicy: "no-cache",
@@ -46,13 +59,13 @@ function LoginForm() {
   });
 
   const sendLogin = () => {
-    if(!formState.username || !formState.password)
+    if(!formState.username || formState.username === '' || !formState.password || formState.password === '')
       notifyError("Inserisci username e password!");
     else 
       doLogin({
         variables: { 
           username: formState.username, 
-          password: formState.password 
+          password: Md5.hashStr(formState.password) 
         }
       });
   }
@@ -101,33 +114,42 @@ function LoginForm() {
                     </h1>
                     <form className="space-y-4 md:space-y-6" action="#">
                         <Toast />
-                        {loading && <h2>Caricamento...</h2>}
+                        {loading && <h2 className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Caricamento...</h2>}
                         <div>
-                            <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Il tuo username</label>
-                            <input type="username" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required 
-                                onChange={(e) =>
-                                  setFormState({
-                                    ...formState,
-                                    username: e.target.value
-                                  })
-                                }
+                            <Input
+                              label="Username"
+                              type="text"
+                              id="username"
+                              placeholder="Inserisci il tuo nome utente..."
+                              value={formState.username}
+                              onChange={(value, err) => OnChangeInputForm(value, err, 'username')}
+                              required={true}
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required 
-                                onChange={(e) =>
-                                  setFormState({
-                                    ...formState,
-                                    password: Md5.hashStr(e.target.value)
-                                  })
-                                }
+                          <Input
+                              label="Password"
+                              type="password"
+                              id="password"
+                              placeholder="Inserisci la tua password..."
+                              value={formState.password}
+                              onChange={(value, err) => OnChangeInputForm(value, err, 'password')}
+                              validationFn={ValidatePassword}
+                              required={true}
                             />
                         </div>
                         <div className="flex items-center justify-between">
                             <div className="flex items-start">
                                 <div className="flex items-center h-5">
-                                  <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required />
+                                  <Input
+                                    label=""
+                                    type="checkbox"
+                                    id="remember"
+                                    placeholder="Inserisci la tua password..."
+                                    value={formState.remember}
+                                    onChange={(value, err) => OnChangeInputForm(value, err, 'remember')}
+                                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                                  />
                                 </div>
                                 <div className="ml-3 text-sm">
                                   <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Ricordati di me</label>
@@ -135,57 +157,22 @@ function LoginForm() {
                             </div>
                             <a href="/" className="text-sm text-white font-medium text-primary-600 hover:underline dark:text-primary-500">Password dimenticata?</a>
                         </div>
-                        <button type="submit" className="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                            onClick={(e) => {
-                                  e.preventDefault();
-                                  console.log("[LoginForm] Submit login");
-                                  sendLogin();
+                        <button className="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                disabled = {!formState.isValid}
+                                style={{backgroundColor: !formState.isValid ? 'grey' : ''}}
+                                onClick={(e) => {
+                                      e.stopPropagation();
+                                      e.preventDefault();
+                                      console.log("[LoginForm] Submit login");
+                                      sendLogin();
+                                    }
                                 }
-                              }
-                        >Accedi</button>
+                        >Accedi
+                      </button>
                     </form>
                 </div>
         </div>
       </section>
-    // <form className="login-form space-content">
-    //   <Toast />
-    //   <div className="login-form__controls">
-    //   {!!loginState && <h5>{loginState.error}</h5>}
-    //   {error && <h5>{error?.message}</h5>}
-    //   {loading && <h2>Loading...</h2>}
-    //     <label>Username</label>
-    //     <input type="username" name="username" required
-    //       onChange={(e) =>
-    //         setFormState({
-    //           ...formState,
-    //           username: e.target.value
-    //         })
-    //       }/>
-    //   </div>
-    //   <div className="login-form__controls">
-    //     <label>Password</label>
-    //     <input type="password" name="password" autoComplete="on" required onChange={(e) =>
-    //         setFormState({
-    //           ...formState,
-    //           password: Md5.hashStr(e.target.value)
-    //         })
-    //       } />
-    //   </div>
-    //   <button className="button color-secondary behavior-full" 
-    //     onClick={(e) => {
-    //         e.preventDefault();
-    //         console.log("[LoginForm] Submit login");
-    //         sendLogin();
-    //       }
-    //     }
-    //     >Login
-    //   </button>
-    //   <label className="checkbox">
-    //     <input type="checkbox" name="remember" />
-    //     <span>Remember me</span>
-    //   </label>
-    //   <a href="/">Forgot password?</a>
-    // </form>
     )
 
   );
