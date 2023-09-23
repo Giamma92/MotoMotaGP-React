@@ -2,7 +2,7 @@
 import Login from './components/Pages/Login'
 import NoPage from './components/Pages/NoPage';
 
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider, useAuth } from './components/Auth/AuthContext';
 
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, ApolloLink } from '@apollo/client';
@@ -51,7 +51,7 @@ function App() {
             //     authorization: getNewToken(),
             //   },
             // });
-            authContext.logout();
+            // authContext.logout();
             // Retry the request, returning the new observable
             return forward(operation);
         }
