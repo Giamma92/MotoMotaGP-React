@@ -121,6 +121,7 @@ function LoginForm() {
                               type="text"
                               id="username"
                               placeholder="Inserisci il tuo nome utente..."
+                              autoComplete='username'
                               value={formState.username}
                               onChange={(value, err) => OnChangeInputForm(value, err, 'username')}
                               required={true}
@@ -132,6 +133,7 @@ function LoginForm() {
                               type="password"
                               id="password"
                               placeholder="Inserisci la tua password..."
+                              autoComplete='current-password'
                               value={formState.password}
                               onChange={(value, err) => OnChangeInputForm(value, err, 'password')}
                               validationFn={ValidatePassword}
