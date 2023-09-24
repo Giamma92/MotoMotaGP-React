@@ -10,9 +10,9 @@ function Login() {
           <div className="inner__brand">
             <div className="bg-neutral-900 radius-large">
               <img
-                  className="brand__logo radius-large"
-                  src="/site-logo.svg"
-                  alt=""
+                  className="brand__logo"
+                  src="/logo.png"
+                  alt="logo"
                 />
 
                 {/* <LogoSvg className="brand__logo radius-large"/> */}
