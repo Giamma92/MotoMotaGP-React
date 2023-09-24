@@ -6,6 +6,7 @@ interface InputProps {
     type: string;
     id: string, 
     placeholder: string,
+    autoComplete?: string,
     className?: string,  
     required?: boolean,
     // error?: string,
@@ -71,6 +72,7 @@ function Input({ required = false,
             <input
                 id={props.id}
                 aria-describedby={props.label}
+                autoComplete={props.autoComplete || 'off'}
                 type={props.type}
                 className={className}
                 placeholder={props.placeholder}
