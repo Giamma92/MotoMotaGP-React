@@ -58,7 +58,7 @@ display: grid;
 }
 
 .brand__logo {
-    max-width: 120px;
+    max-width: 90px;
 }
 
 .brand__text {
@@ -68,7 +68,13 @@ display: grid;
 
     > :first-child {
     font-weight: bold;
-    @include size-48;
+    @media (min-width: 640px) {
+        @include size-48;
+    }
+    @media (max-width: 640px) {
+        @include size-36;
+    }
+    
     }
 
     > :last-child {
@@ -89,6 +95,7 @@ display: grid;
     }
 }
 
+//Remove to test pwa with lighthouse
 .reveal {
     animation: reveal 0.3s ease-in;
 }
