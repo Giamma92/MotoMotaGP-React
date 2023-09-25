@@ -1,6 +1,8 @@
-function Icon({ icon = '', size = '1x', color = 'currentColor', className = '', ...rest }) {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+function Icon({ icon = '', size = '1x', color = 'currentColor', className = '', ...rest }: any) {
     return (
-        <i className={`${icon} ${size} ${className}`} {...rest} />
+        <FontAwesomeIcon icon={icon} size={size} color={color} className={className} {...rest} />
     );
 }
 
