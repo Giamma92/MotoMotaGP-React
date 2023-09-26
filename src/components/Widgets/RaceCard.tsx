@@ -1,6 +1,6 @@
-import { getConfig, getLoggedInUser, getCurrentRace, getNextRace } from "../utils/local-storage-utils";
+import { getConfig, getLoggedInUser, getCurrentRace, getNextRace } from "utils/local-storage-utils";
 import { useQuery } from '@apollo/client';
-import { GET_CURR_NEXT_RACE } from "./queries";
+import { GET_CURR_NEXT_RACE } from "components/queries";
 // import { GET_CURR_NEXT_RACE } from './queries';
 
 function RaceCard() {
@@ -10,7 +10,7 @@ function RaceCard() {
     // const currentRace = getCurrentRace();
     // const nextRace = getCurrentRace();
 
-    if(!user || !user.username) return "User not loggedIn"
+    // if(!user || !user.username) return "User not loggedIn"
 
 
     const config = getConfig();

@@ -12,7 +12,9 @@ import { onError } from '@apollo/client/link/error';
 // import PrivateOutlet from './components/Auth/PrivateOutlet';
 
 import PrivateRoute from 'components/Auth/PrivateRoute';
-import Dashboard from 'components/Pages/Dashboard';
+
+import { ThemeProvider } from './components/UI/ThemeContext'
+import Background from './components/UI/Background'
 
 //fontawesome
 // import the library
@@ -23,6 +25,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import Layout from 'components/UI/Layout';
+import Home from 'components/Pages/Home';
 
 
 function App() {
@@ -92,9 +95,7 @@ function App() {
             </Route> */}
             <Route index element={
               <PrivateRoute>
-                <Layout>
-                  <Dashboard />
-                </Layout>                
+                <Home />
               </PrivateRoute>
             } />
             <Route path="/login" element={<Login/>} />

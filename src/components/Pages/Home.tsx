@@ -1,5 +1,12 @@
+import Layout from "components/UI/Layout";
+import Dashboard from "./Dashboard";
+
 function Home() {
-    return (<div>Home</div>);
+    return (
+        <Layout>
+            <Dashboard />
+        </Layout>  
+    );
 }
 
 export default Home;
