@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GET_PILOTI_CAMPIONATO } from "./queries";
 import { useQuery } from '@apollo/client';
-import DropDown from './DropDown';
+import DropDown from './UI/DropDown';
 import { getConfig, getLoggedInUser } from "../utils/local-storage-utils";
 
 

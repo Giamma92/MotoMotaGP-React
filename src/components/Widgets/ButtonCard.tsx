@@ -1,8 +1,8 @@
-import '../scss/ButtonCard.scss';
+import 'scss/ButtonCard.scss';
 import { useQuery } from '@apollo/client';
-import { getConfig, getCurrentRace, getLoggedInUser, getNextRace } from "../utils/local-storage-utils";
-import { GET_CURR_NEXT_RACE } from './queries';
-import {getMomentDate, getMomentToday } from '../utils/dates-utils';
+import { getConfig, getCurrentRace, getLoggedInUser, getNextRace } from "utils/local-storage-utils";
+import { GET_CURR_NEXT_RACE } from 'components/queries';
+import {getMomentDate, getMomentToday } from 'utils/dates-utils';
 import type { Moment } from 'moment';
 
 function openFormScommesse() {
@@ -18,7 +18,7 @@ function ButtonCard() {
     const user = getLoggedInUser();
     const config = getConfig();
 
-    if(!user || !user.username) return "User not loggedIn"
+    // if(!user || !user.username) return "User not loggedIn"
 
     const { loading, error, data } = useQuery(GET_CURR_NEXT_RACE, {
         variables: {
@@ -40,7 +40,7 @@ function ButtonCard() {
         </div>
     );
     
-    if (error) return `Error! ${error.message}`;
+    if (error) return <p>`Error! ${error.message}`</p>;
 
     const dateFormat = 'DD/MM/YYYY'
 
@@ -69,7 +69,7 @@ function ButtonCard() {
                                                 <h5 className='size-30'><em>Giorno Gara!</em></h5>
                                             </div>)
 
-    return ('Error dates');
+    return (<p>[Button card] Error dates</p>);
 
 }
 

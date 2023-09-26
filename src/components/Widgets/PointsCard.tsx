@@ -1,18 +1,18 @@
-import '../../assets/scss/Calendar.scss'
+// import 'assets/scss/Calendar.scss'
 import { useQuery } from '@apollo/client';
-import { getConfig, getLoggedInUser } from "../utils/local-storage-utils";
-import { GET_CLASSIFICA, GET_TEAM } from './queries';
+import { getConfig, getLoggedInUser } from "utils/local-storage-utils";
+import { GET_CLASSIFICA } from 'components/queries';
 
 function Pointsard() {
 
     const user = getLoggedInUser();
     const config = getConfig();
 
-    if(!user || !user.username) return "User not loggedIn"
+    // if(!user || !user.username) return "User not loggedIn"
 
     const { loading, error, data } = useQuery(GET_CLASSIFICA, {
         variables: {
-            username: user.username,
+            username: user?.username,
             idCampionato: config?.idCampionato
         },
         fetchPolicy: "no-cache",
@@ -31,7 +31,8 @@ function Pointsard() {
         </div>
     );
     
-    if (error) return `Error! ${error.message}`;
+    if (error) return <p>`Error! ${error.message}`</p>;
+    if (!data || !data.classifica || !data.classifica[0]) return <p>`No results`</p>;
 
     let team = data.team;
 

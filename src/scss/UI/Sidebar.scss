@@ -1,0 +1,45 @@
+.brand__logo {
+    max-width: 45px;
+}
+
+.toggle__menu {
+    background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+    border: 1px solid rgb(229 231 235 / var(--tw-border-opacity));
+    height: 30px;
+    width: 30px;
+    padding: 3px;
+}
+
+.expand {
+    animation: expand 0.3s ease;
+}
+
+.coll {
+    animation: coll 0.3s ease;
+}
+
+@keyframes coll {
+    from {width: 13.3rem;}
+    to {width: 6rem;}
+}
+
+@keyframes expand {
+    from {width: 6rem;}
+    to {width: 13.3rem;}
+}
+
+.reveal {
+    animation: reveal 0.3s ease-in;
+}
+
+@keyframes reveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-1rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
