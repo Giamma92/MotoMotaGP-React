@@ -34,7 +34,7 @@ function Pointsard() {
     if (error) return <p>`Error! ${error.message}`</p>;
     if (!data || !data.classifica || !data.classifica[0]) return <p>`No results`</p>;
 
-    let team = data.team;
+    //let team = data.team;
 
     return (<div>
                 <h5 className="size-48"><em>+{data.classifica[0].punteggio}</em></h5>

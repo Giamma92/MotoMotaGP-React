@@ -1,26 +1,29 @@
 import 'scss/ButtonCard.scss';
 import { useQuery } from '@apollo/client';
-import { getConfig, getCurrentRace, getLoggedInUser, getNextRace } from "utils/local-storage-utils";
+import { getConfig, getCurrentRace } from "utils/local-storage-utils";
 import { GET_CURR_NEXT_RACE } from 'components/queries';
-import {getMomentDate, getMomentToday } from 'utils/dates-utils';
+import { getMomentDate, getMomentToday } from 'utils/dates-utils';
 import type { Moment } from 'moment';
-
-function openFormScommesse() {
-    window.location.href = '/form-scommesse';
-}
-
-function openFormSchiermanto() {
-    window.location.href = '/form-scbieramento';
-}
+import { useNavigate } from 'react-router-dom';
 
 function ButtonCard() {
 
-    const user = getLoggedInUser();
+    //const user = getLoggedInUser();
     const config = getConfig();
+
+    const navigate = useNavigate();
+
+    function openFormScommesse() {
+        navigate('/form-scommesse');
+    }
+    
+    // function openFormSchiermanto() {
+    //     navigate('/form-scbieramento');
+    // }
 
     // if(!user || !user.username) return "User not loggedIn"
 
-    const { loading, error, data } = useQuery(GET_CURR_NEXT_RACE, {
+    const { loading, error } = useQuery(GET_CURR_NEXT_RACE, {
         variables: {
             idCampionato: config?.idCampionato
         },

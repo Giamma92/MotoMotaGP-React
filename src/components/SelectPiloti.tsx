@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { GET_PILOTI_CAMPIONATO } from "./queries";
+import { GET_PILOTI_CAMPIONATO } from "components/queries";
 import { useQuery } from '@apollo/client';
-import DropDown from './UI/DropDown';
-import { getConfig, getLoggedInUser } from "../utils/local-storage-utils";
-
-
+import DropDown from 'components/UI/DropDown';
+import { getConfig } from "utils/local-storage-utils";
 
 export function SelectPiloti({onSelected}: any) {
 

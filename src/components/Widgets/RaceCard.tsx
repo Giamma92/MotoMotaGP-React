@@ -1,11 +1,11 @@
-import { getConfig, getLoggedInUser, getCurrentRace, getNextRace } from "utils/local-storage-utils";
+import { getConfig, getCurrentRace, getNextRace } from "utils/local-storage-utils";
 import { useQuery } from '@apollo/client';
 import { GET_CURR_NEXT_RACE } from "components/queries";
 // import { GET_CURR_NEXT_RACE } from './queries';
 
 function RaceCard() {
 
-    const user = getLoggedInUser();
+    // const user = getLoggedInUser();
     // const config = getConfig();
     // const currentRace = getCurrentRace();
     // const nextRace = getCurrentRace();
@@ -17,7 +17,7 @@ function RaceCard() {
     const cachedCurrentRace = getCurrentRace();
     const cachedNextRace = getNextRace();
 
-    const { loading, error, data } = useQuery(GET_CURR_NEXT_RACE, {
+    const { loading, data } = useQuery(GET_CURR_NEXT_RACE, {
         variables: {
             idCampionato: config?.idCampionato
         },
@@ -40,8 +40,8 @@ function RaceCard() {
     const currentRace = data?.currentRace;//{id: '1', data: '30/04/2023', ordine_gp: '10', nome_gara: 'Mocked gara', luogo_gara: 'Luogo gara', ora_limite_scomesse: 12};
     const nextRace = data?.nextRace;
 
-    (!cachedCurrentRace || cachedCurrentRace?.id != currentRace?.id) && localStorage.setItem('current-race', JSON.stringify(currentRace, null, 4));
-    (!cachedNextRace || cachedNextRace?.id != currentRace?.id) && localStorage.setItem('next-race', JSON.stringify(nextRace, null, 4));
+    (!cachedCurrentRace || cachedCurrentRace?.id !== currentRace?.id) && localStorage.setItem('current-race', JSON.stringify(currentRace, null, 4));
+    (!cachedNextRace || cachedNextRace?.id !== currentRace?.id) && localStorage.setItem('next-race', JSON.stringify(nextRace, null, 4));
 
 
     // const { loading, error, data } = useQuery(GET_CURR_NEXT_RACE, {

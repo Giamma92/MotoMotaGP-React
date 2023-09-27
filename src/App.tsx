@@ -13,9 +13,6 @@ import { onError } from '@apollo/client/link/error';
 
 import PrivateRoute from 'components/Auth/PrivateRoute';
 
-import { ThemeProvider } from './components/UI/ThemeContext'
-import Background from './components/UI/Background'
-
 //fontawesome
 // import the library
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -24,7 +21,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
-import Layout from 'components/UI/Layout';
 import Home from 'components/Pages/Home';
 
 
