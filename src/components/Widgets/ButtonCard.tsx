@@ -1,7 +1,7 @@
 import 'scss/ButtonCard.scss';
 import { useQuery } from '@apollo/client';
 import { getConfig, getCurrentRace } from "utils/local-storage-utils";
-import { GET_CURR_NEXT_RACE } from 'components/queries';
+import { GET_CURR_NEXT_RACE } from 'utils/queries';
 import { getMomentDate, getMomentToday } from 'utils/dates-utils';
 import type { Moment } from 'moment';
 import { useNavigate } from 'react-router-dom';

@@ -1,4 +1,4 @@
-import LoginForm from '../Forms/LoginForm'
+import LoginForm from 'components/Forms/LoginForm'
 
 // import { ReactComponent as LogoSvg } from 'assets/img/site-logo.svg';
 

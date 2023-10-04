@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 import { ReactComponent as LogoSvg } from 'assets/img/site-logo.svg';
 
-import Icon from '../Icon'
+import Icon from 'components/UI/elements/Icon'
 import HamburgerButton from '../menu/HamburgerButton'
 
 import 'scss/UI/Sidebar.scss'

@@ -1,9 +1,9 @@
-import { useLazyQuery, useQuery } from "@apollo/client";
-import { GET_CONFIG } from "components/queries";
-import { createContext, useContext, useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_CONFIG } from "utils/queries";
+import { createContext, useContext, useState } from "react";
 
 interface Config  {
-    idCampionato: string;
+    id: string;
     sessionTimeout: number,
     betsLimitSprintracePoints: number;
     betsLimitPoints: number;
@@ -15,40 +15,37 @@ interface Config  {
 }
 
 const AppContext = createContext({
+    loading: false as boolean,
     config: null as Config|null,
     // idCurrentRace: null as string|null,
     // idNextRace: null as string|null,
 
-    setConfigValue: (config: any) => {}
+    //setConfigValue: (config: any) => {}
 });
+
 
 export const useApp = () => useContext(AppContext);
 
 export const AppProvider = ({ children }: any) => {
     const [config, setConfig] = useState<Config|null>(null);
-    const [idCurrentRace, setIdCurrentRace] = useState<string|null>(null);
-    const [idNextRace, setIdNextRace] = useState<string|null>(null);
+    // const [idCurrentRace, setIdCurrentRace] = useState<string|null>(null);
+    // const [idNextRace, setIdNextRace] = useState<string|null>(null);
 
-    
-    const setConfigValue = (config: any): void => {
-        setConfig(config);
+    const {loading, error, data } = useQuery(GET_CONFIG, {
+        variables: {
+            configId: '1'
+        },
+        fetchPolicy: "no-cache",
+        notifyOnNetworkStatusChange: true
+    });
+
+    if(!loading && !error && !!data.config && !config) {
+        console.log('Configs: ', data?.config);
+        setConfig(data?.config)
     }
 
-    // if(!loading && !error) {
-    //     console.log('Configs: ', data.config)
-    //     setConfig(data.config);
-    // }
-
-
-    // useEffect(() => {
-    //     if(!loading && !error && !!data)  {
-    //         console.log('Configs: ', data?.config);
-    //     }
-    // }, [data, loading, error]);
-    
-
     return (
-        <AppContext.Provider value={{ config, setConfigValue }}>
+        <AppContext.Provider value={{ config, loading }}>
             {children}
         </AppContext.Provider>
     );

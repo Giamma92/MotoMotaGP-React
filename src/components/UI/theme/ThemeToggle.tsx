@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {ThemeContext} from './ThemeContext'
-import Icon from './Icon'
+import Icon from 'components/UI/elements/Icon'
 
 const Toggle = () => {
     const {theme, applyTheme} = useContext(ThemeContext)

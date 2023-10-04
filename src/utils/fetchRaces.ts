@@ -1,4 +1,4 @@
-import { getConfig, getCurrentRace, getNextRace } from "../utils/local-storage-utils";
+import { getConfig, getCurrentRace, getNextRace } from "./local-storage-utils";
 import { useQuery } from '@apollo/client';
 import { GET_CURR_NEXT_RACE } from "./queries";
 

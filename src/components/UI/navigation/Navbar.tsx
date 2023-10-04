@@ -1,4 +1,4 @@
-import Toggle from "../ThemeToggle";
+// import Toggle from "../theme/ThemeToggle";
 
 const Navbar = () => {
     return (

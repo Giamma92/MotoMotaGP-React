@@ -1,7 +1,7 @@
 import React from 'react'
-import Sidebar from './navigation/Sidebar'
-import Navbar from './navigation/Navbar'
-import { Toast } from 'components/Toast'
+import Sidebar from 'components/UI/navigation/Sidebar'
+import Navbar from 'components/UI/navigation/Navbar'
+import { Toast } from 'components/UI/elements/Toast'
 
 
 const Layout = ({ children }: any) => {

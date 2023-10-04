@@ -2,32 +2,19 @@ import 'scss/Dashboard.scss'
 
 import { useAuth } from 'components/Auth/AuthContext'
 
-import Widget from "components/UI/Widget"
+import Widget from "components/Widgets/Widget"
 import PointsCard from "components/Widgets/PointsCard"
 import RaceCard from "components/Widgets/RaceCard"
 import TeamCard from "components/Widgets/TeamCard"
 import ButtonCard from 'components/Widgets/ButtonCard'
 import { useApp } from 'components/App/AppContext'
-import { GET_CONFIG } from 'components/queries'
-import { useQuery } from '@apollo/client'
 
 const Dashboard = () => {
 
     const authContext = useAuth();
     const appContext = useApp();
 
-    const {loading, error, data } = useQuery(GET_CONFIG, {
-        variables: {
-            configId: '1'
-        },
-        fetchPolicy: "no-cache",
-        notifyOnNetworkStatusChange: true
-    });
-
-    if(!loading && !error) {
-        console.log('Configs: ', data?.config);
-        appContext.setConfigValue(data?.config)
-    }
+    let loading = appContext.loading;
 
     return (
         <div className='dark:text-white'>
@@ -49,9 +36,10 @@ const Dashboard = () => {
                         </div> */}
                             <ButtonCard />
                         </Widget>
-                        <Widget title="Team">
+                        { !loading && 
+                        (<Widget title="Team">
                             <TeamCard />
-                        </Widget>
+                        </Widget>)}
                         <Widget title="Punti">
                             <PointsCard/>
                         </Widget>

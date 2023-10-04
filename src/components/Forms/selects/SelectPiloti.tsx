@@ -1,6 +1,6 @@
-import { GET_PILOTI_CAMPIONATO } from "components/queries";
+import { GET_PILOTI_CAMPIONATO } from "utils/queries";
 import { useQuery } from '@apollo/client';
-import DropDown from 'components/UI/DropDown';
+import DropDown from 'components/UI/elements/DropDown';
 import { getConfig } from "utils/local-storage-utils";
 
 export function SelectPiloti({onSelected}: any) {

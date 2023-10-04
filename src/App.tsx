@@ -1,7 +1,3 @@
-// import Home from './components/Pages/Home';
-import Login from './components/Pages/Login'
-import NoPage from './components/Pages/NoPage';
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider, useAuth } from './components/Auth/AuthContext';
 
@@ -9,11 +5,18 @@ import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, ApolloLink } fro
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 
-// import PrivateOutlet from './components/Auth/PrivateOutlet';
+// Pages
+import Login from './components/Pages/Login'
+import NoPage from './components/Pages/NoPage';
+import Home from 'components/Pages/Home';
+import TableBetsRace from "components/Pages/TableBetsRace";
 
+
+// Route elements
+// import PrivateOutlet from './components/Auth/PrivateOutlet';
 import PrivateRoute from 'components/Auth/PrivateRoute';
 
-//fontawesome
+//Font-awesome Icons
 // import the library
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -21,8 +24,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
-import Home from 'components/Pages/Home';
-
+import Layout from "components/UI/elements/Layout";
 
 function App() {
 
@@ -92,6 +94,13 @@ function App() {
             <Route index element={
               <PrivateRoute>
                 <Home />
+              </PrivateRoute>
+            } />
+            <Route path="betsrace" element={
+              <PrivateRoute>
+                <Layout>
+                  <TableBetsRace />
+                </Layout>
               </PrivateRoute>
             } />
             <Route path="/login" element={<Login/>} />

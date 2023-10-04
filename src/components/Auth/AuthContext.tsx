@@ -1,5 +1,5 @@
 // AuthContext.js
-import { AUTH_TOKEN } from 'components/constants';
+import { AUTH_TOKEN } from 'utils/constants';
 import { createContext, useContext, useEffect, useState } from 'react';
 import {Buffer} from 'buffer';
 
@@ -51,7 +51,6 @@ export const AuthProvider = ({ children }: any) => {
         const user = decodeUser(token);
 
         setUser(user);
-
         setToken(token);
     };
 
