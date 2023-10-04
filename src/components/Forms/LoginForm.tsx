@@ -21,16 +21,25 @@ function LoginForm() {
     username: '',
     password: '',
     remember: true,
+  });
 
-    isValid: true
+  const [formValidation, setFormValidation] = useState({
+    username: true,
+    password: true,
+    remember: true
   });
 
 
+  function isValid(): boolean {
+    return formValidation.username && formValidation.password
+  }
+
   function OnChangeInputForm(value: any, error: string, field: string): void {
       (formState as any)[field] = value;
-
-      const isValid = !error || error === ''
-      setFormState({...formState, isValid})
+      setFormState({...formState});
+      const isValid = (!error || error === '');
+      (formValidation as any)[field] = isValid;
+      setFormValidation({...formValidation });
   }
 
   function  ValidatePassword(value: any) {
@@ -160,8 +169,8 @@ function LoginForm() {
                             <a href="/" className="text-sm text-white font-medium text-primary-600 hover:underline dark:text-primary-500">Password dimenticata?</a>
                         </div>
                         <button className="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                                disabled = {!formState.isValid}
-                                style={{backgroundColor: !formState.isValid ? 'grey' : ''}}
+                                disabled = {!isValid()}
+                                style={{backgroundColor: !isValid() ? 'grey' : ''}}
                                 onClick={(e) => {
                                       e.stopPropagation();
                                       e.preventDefault();

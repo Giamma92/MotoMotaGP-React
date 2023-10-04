@@ -1,11 +1,14 @@
 import Layout from "components/UI/Layout";
 import Dashboard from "./Dashboard";
+import { AppProvider } from "components/App/AppContext";
 
 function Home() {
     return (
-        <Layout>
-            <Dashboard />
-        </Layout>  
+        <AppProvider>
+            <Layout>
+                <Dashboard />
+            </Layout>  
+        </AppProvider>
     );
 }
 

@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_CONFIG = gql`
-  query Team($configId: Int!) {
+  query Config($configId: String!) {
     config(id: $configId) {
       id
       id_campionato
